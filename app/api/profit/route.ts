@@ -1,4 +1,4 @@
-import { generateStockData, sumPrices } from "@/utils";
+import { annualized, generateStockData, sumPrices } from "@/utils";
 import { NextResponse } from "next/server";
 
 const stockData = [
@@ -26,23 +26,13 @@ export async function GET(req: NextResponse) {
     };
   });
 
-  const calcYears = (startDate: string | null, endDate: string | null) => {
-    const start = new Date(startDate || "2021-01-01");
-    const end = new Date(endDate || "2021-01-01");
-    const diffTime = Math.abs(end.getTime() - start.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays / 365;
-  };
 
   const profit = () => {
     return filtered.map((stock) => {
       return {
         id: stock.id,
         price: sumPrices(stock.prices),
-        annualized: (sumPrices(stock.prices) * 12) / calcYears(
-          startDate,
-          endDate
-        ),
+        annualized: annualized(stock, startDate, endDate),
       };
     });
   };
