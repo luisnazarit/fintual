@@ -33,6 +33,8 @@ export async function GET(req: NextResponse) {
         id: stock.id,
         price: sumPrices(stock.prices),
         annualized: annualized(stock, startDate, endDate),
+        startDatePrice: stock.prices[0].price,
+        endDatePrice: stock.prices[1].price,
       };
     });
   };

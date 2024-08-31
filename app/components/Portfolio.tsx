@@ -6,7 +6,7 @@ type Stock = {
   id: string;
   price: number;
   annualized: number;
-}
+};
 
 export default function Portfolio({
   startDate,
@@ -25,12 +25,27 @@ export default function Portfolio({
       {profit && profit.length > 0 ? (
         profit.map((stock: Stock) => (
           <div key={stock.id} className="mb-4">
-            <div className="flex gap-4">
-              <div>{stock.id}:</div>
-              <div className="text-sm">
-                <p>Profit: <strong>{stock.price.toFixed(2)}</strong></p>
-                <p>Annualized: <strong>{stock.annualized.toFixed(2)}</strong></p>
-               </div>
+            <div className="flex gap-8 border-b border-slate-200 py-4">
+              <div className="text-lg">{stock.id}:</div>
+              <div className="text-sm flex gap-8">
+                <div>
+                  <p>
+                    {startDate}:{" "}
+                    <strong>{stock.startDatePrice.toFixed(2)}</strong>
+                  </p>
+                  <p>
+                    {endDate}: <strong>{stock.endDatePrice.toFixed(2)}</strong>
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    Profit: <strong>{stock.price.toFixed(2)}</strong>
+                  </p>
+                  <p>
+                    Annualized: <strong>{stock.annualized.toFixed(2)}</strong>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         ))

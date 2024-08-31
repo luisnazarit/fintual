@@ -15,7 +15,7 @@ const usePortfolio = (startDate: string, endDate: string) => {
 
   return {
     profit,
-    loading
+    loading,
   }
 
 };
